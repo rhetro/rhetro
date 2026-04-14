@@ -6,7 +6,7 @@ I am developing the **Cognitive Operating System**, an AI architecture designed 
 
 To support this, I build systems-level tools that focus on structural representation, compile-time evaluation, and memory-efficient runtime execution.
 
-### 🔭 The Toolchain
+## 🔭 The Toolchain
 
 I recently designed and built the following foundational components to address specific architectural limitations in Rust:
 
