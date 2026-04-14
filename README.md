@@ -9,10 +9,15 @@ To support this, I build systems-level tools that focus on structural representa
 ## 🔭 The Toolchain
 I recently designed and built the following foundational components to address specific architectural limitations in Rust:
 
+### 🔭 The Toolchain
+
+I recently designed and built the following foundational components to address specific architectural limitations in Rust:
+
 * **[Ordex](https://github.com/rhetro/ordex)** — A zero-overhead aliasing resolver and memory router for non-linear topologies. It breaks Rust's multi-mutable reference dilemma by mapping aliasing constraints directly onto hardware latency (O(1) SIMD / O(N log N) sweeps), enabling simultaneous mutable access without runtime borrow checking or heap traffic.
 * **[Axioma](https://github.com/rhetro/axioma)** — Compile-time declarative macros for static JSON-to-Matrix topology projection.
 * **[Axiomabuf](https://github.com/rhetro/axiomabuf)** — A 1-pass, zero-allocation static macro-router for Protocol Buffers. It structurally eliminates panic paths to achieve DRAM physical limit throughput (~1.36 GB/s) via push-driven delegation.
-* **[Xopsy](https://github.com/rhetro/xopsy)** — A structural pattern-matching DSL for JSON. It eliminates Option hell through a CPS architecture, safely projecting deeply nested dynamic data into static borrow scopes. Don't parse. Recognize.
+* **[Xopsy](https://github.com/rhetro/xopsy)** — A structural pattern-matching DSL for JSON diagnostics. It eliminates `Option` hell through a CPS architecture, safely projecting deeply nested dynamic data into static borrow scopes. *Don't parse. Recognize.*
+* **[Xopsyml](https://github.com/rhetro/xopsyml)** — The Diagnostic Prism for YAML. A zero-allocation structural pattern-matching DSL for declarative diagnostics and surgical in-place updates.
 * **[Opejson](https://github.com/rhetro/opejson)** — A declarative, zero-overhead JSON surgery DSL. It provides precise auto-vivification by compiling complex traversal paths directly into static pointer chains, bypassing runtime string parsing.
 * **[Opeyml](https://github.com/rhetro/opeyml)** — The strict YAML counterpart to `opejson`. Reduces complex topological mutations down to pure, static memory operations without runtime parsing.
 
