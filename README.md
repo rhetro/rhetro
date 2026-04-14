@@ -9,7 +9,7 @@ To support this, I build systems-level tools that focus on structural representa
 ## 🔭 The Toolchain
 I recently designed and built the following foundational components to address specific architectural limitations in Rust:
 
-* **[Ordex](https://github.com/rhetro/ordex)** — A strict, generational arena allocator designed for multi-mutable graph topologies. It enables simultaneous mutable access to multiple elements without per-access heap allocations. (Driving 100 FPS on Wasm for 4,000 nodes in real-time Lotka-Volterra simulations).
+* **[Ordex](https://github.com/rhetro/ordex)** — A zero-overhead aliasing resolver and memory router for non-linear topologies. It breaks Rust's multi-mutable reference dilemma by mapping aliasing constraints directly onto hardware latency (O(1) SIMD / O(N log N) sweeps), enabling simultaneous mutable access without runtime borrow checking or heap traffic.
 * **[Axioma](https://github.com/rhetro/axioma)** — Compile-time declarative macros for static JSON-to-Matrix topology projection.
 * **[Axiomabuf](https://github.com/rhetro/axiomabuf)** — A 1-pass, zero-allocation static macro-router for Protocol Buffers. It structurally eliminates panic paths to achieve DRAM physical limit throughput (~1.36 GB/s) via push-driven delegation.
 * **[Xopsy](https://github.com/rhetro/xopsy)** — A structural pattern-matching DSL for JSON diagnostics.
