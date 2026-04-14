@@ -13,7 +13,7 @@ I recently designed and built the following foundational components to address s
 * **[Axioma](https://github.com/rhetro/axioma)** — Compile-time declarative macros for static JSON-to-Matrix topology projection.
 * **[Axiomabuf](https://github.com/rhetro/axiomabuf)** — A 1-pass, zero-allocation static macro-router for Protocol Buffers. It structurally eliminates panic paths to achieve DRAM physical limit throughput (~1.36 GB/s) via push-driven delegation.
 * **[Xopsy](https://github.com/rhetro/xopsy)** — A structural pattern-matching DSL for JSON diagnostics.
-* **[Opejson](https://github.com/rhetro/opejson)** — Surgical macros that provide safe auto-vivification for JSON manipulation in Rust.
+* **[Opejson](https://github.com/rhetro/opejson)** — A declarative, zero-overhead JSON surgery DSL. It provides precise auto-vivification by compiling complex traversal paths directly into static pointer chains, bypassing runtime string parsing.
 * **[Opeyml](https://github.com/rhetro/opeyml)** — The strict YAML counterpart to `opejson`. Reduces complex topological mutations down to pure, static memory operations without runtime parsing.
 
 
