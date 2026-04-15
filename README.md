@@ -21,10 +21,21 @@ I recently designed and built the following foundational components to address s
 * **[Opeyml](https://github.com/rhetro/opeyml)** — The strict YAML counterpart to `opejson`. Reduces complex topological mutations down to pure, static memory operations without runtime parsing.
 
 
-## 🧠 Focus
+## 🔍 Focus
 * **Non-LLM AI:** Meaning-driven intelligence via structural cognition.
 * **Mechanical Sympathy:** Optimizing high-level data structures for hardware realities (e.g., cache locality, register-level checks).
 * **Compile-time Abstraction:** Moving dynamic evaluations to compile-time resolution via macros.
+
+## 🧩 Parallel Tools
+Additional structural tools that coexist with the Cognitive OS toolchain.
+
+* **Emlex** — A compile-time S-expression math DSL built entirely with `macro_rules!`.  
+  - Fully parses S-expressions using `macro_rules!` only  
+  - Compile-time AST construction and Reverse DSL regeneration  
+  - Structural AST pattern-matching for math optimization (e.g., `exp(ln(x)) → x`)  
+  - Lazy-evaluation mechanism enabling LLVM DCE to remove unused ASTs (zero runtime overhead)  
+  - Dual engines: real-number DSL `eml!` and complex-number DSL `ceml!` (evaluates Euler’s identity)
+
 
 ## 🔗 Links & Contact
 * **Research:** [Cognitive Operating System (Zenodo)](https://doi.org/10.5281/zenodo.18191421)
