@@ -29,7 +29,7 @@ I recently designed and built the following foundational components to address s
 ## 🧩 Parallel Tools
 Additional structural tools that coexist with the Cognitive OS toolchain.
 
-* **Emlex** — A compile-time S-expression math DSL built entirely with `macro_rules!`.  
+* **[Emlex](https://github.com/rhetro/emlex)** — A compile-time S-expression math DSL built entirely with `macro_rules!`.  
   - Fully parses S-expressions using `macro_rules!` only  
   - Compile-time AST construction and Reverse DSL regeneration  
   - Structural AST pattern-matching for math optimization (e.g., `exp(ln(x)) → x`)  
