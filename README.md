@@ -6,6 +6,7 @@ I am developing the **Cognitive Operating System**, an AI architecture designed 
 
 To support this, I build systems-level tools that focus on structural representation, compile-time evaluation, and memory-efficient runtime execution.
 
+
 ## 📦 The Toolchain Overview
 
 I recently designed and built the following foundational components to address specific architectural limitations in Rust:
@@ -23,6 +24,7 @@ I recently designed and built the following foundational components to address s
 | **[Xopsy](https://github.com/rhetro/xopsy)** · [crates.io](https://crates.io/crates/xopsy) | Dynamic Data Surgery & Diagnostics | 300 | serde_json | Structural JSON pattern matcher bypassing borrow-checker limits. |
 | **[Xopsyml](https://github.com/rhetro/xopsyml)** · [crates.io](https://crates.io/crates/xopsyml) | Dynamic Data Surgery & Diagnostics | 480 | serde_yaml | YAML diagnostic prism for zero-allocation structural matching. |
 
+
 ## 🔭 The Toolchain
 
 ### What I Solve — The Missing Layer in Modern Computing
@@ -35,6 +37,7 @@ Modern languages and runtimes cannot natively express the following concepts:
 
 These are not mere targets for "performance tuning"; they represent structural impossibilities within the current computational model. My work focuses on developing the toolchains required to reconstruct these missing primitives.
 
+
 ### Structural Execution Primitives
 
 **[Ordex](https://github.com/rhetro/ordex) — Deterministic Aliasing & Generational Arena**
@@ -45,10 +48,12 @@ A generational arena that maintains the absolute physical limits of sequential a
 * **Simultaneous Access for N ≤ 16 (`align!`):** Performs verification using fixed-size stack arrays, triggering LLVM auto-vectorization (SIMD) to complete validation in effectively O(1) time with zero allocations.
 * **Simultaneous Access for N > 16 (`ordex`):** Switches to a batch verification model using O(N log N) dynamic sorting and O(N) linear scanning. This prevents I-Cache (Instruction Cache) bloat while strictly keeping heap allocations at absolute zero within high-frequency loops.
 
+
 **[Ordag](https://github.com/rhetro/ordag) — Static DAG Prover & Execution Engine**
 > A compile-time prover that mathematically guarantees the absence of Read/Write conflicts in non-linear topologies, eliminating runtime safety checks entirely.
 
 An execution engine that completely eliminates runtime borrow checking and complex locking mechanisms, which are typical bottlenecks in DAG processing. By utilizing Kahn's algorithm and stream ID tracking, it parses graph structures at compile time, mathematically proving the absolute absence of Read/Write data conflicts. This bypasses runtime safety validation entirely, generating a pure execution plan with zero allocation that maximizes hardware memory bandwidth.
+
 
 **[Ordent](https://github.com/rhetro/ordent) — Hardware-Synchronous Wave Router**
 > A deterministic phase-collapse engine that converts Kuramoto synchronization into integer-based, SIMD-aligned hardware operations.
@@ -58,6 +63,7 @@ A hardware router designed to force "deterministic state collapse" on non-linear
 * Maintains topology in a Compressed Sparse Row (CSR) format, flipping the computation axis from edge-centric to node-centric to fundamentally eliminate data races.
 * Achieves 100% SIMD (`f32x8`) lane saturation via a branchless Taylor series expansion.
 
+
 ### Static Projection & Compilation
 
 **[Axioma](https://github.com/rhetro/axioma) — Compile-Time JSON-to-Matrix Projection**
@@ -65,10 +71,12 @@ A hardware router designed to force "deterministic state collapse" on non-linear
 
 A declarative macro library that projects dynamic, hierarchical JSON structures directly into static 2D coordinate spaces (sparse matrices) at compile time. It completely avoids runtime parsing and heap allocations (`Vec`, `HashMap`), reaching values directly via O(1) jump tables. By eliminating procedural macros entirely, it compiles even massive JSON payloads in milliseconds.
 
+
 **[Axiomabuf](https://github.com/rhetro/axiomabuf) — 1-Pass Static Macro-Router for Protobuf**
 > A zero-allocation Protocol Buffers router that replaces byte-parsing with structural routing.
 
 A zero-allocation Protocol Buffers router designed for systems requiring extreme throughput. By eliminating per-byte boundary checks and mathematically proving memory space safety upfront, it eradicates LLVM panic paths and fixes branch prediction. Nested messages are handled via push-driven closure delegation, recording a throughput of ~1.36 GB/s, which approaches the physical limits of single-threaded DRAM sequential reads.
+
 
 ### Dynamic Data Surgery & Diagnostics
 
@@ -77,15 +85,18 @@ A zero-allocation Protocol Buffers router designed for systems requiring extreme
 
 Deep path operations on dynamic data (such as auto-vivification, which generates non-existent trees while assigning) typically carry the heavy overhead of runtime string path parsing. These DSLs expand path declarations (e.g., `.users[0].name`) entirely into static pointer chains and native memory access instructions at compile time. By neutralizing path parsing to zero, they execute millions of structural mutations per second and instant multi-dimensional array allocations (`mesh!`) at near bare-metal speeds.
 
+
 **[Xopsy](https://github.com/rhetro/xopsy) / [Xopsyml](https://github.com/rhetro/xopsyml) — Zero-Allocation Structural Pattern Matcher**
 > A structural matcher that bypasses Rust’s borrow-checker limitations by operating directly on topology, not text.
 
 Standard Rust struggles with extracting multiple mutable references (`&mut`) deep within JSON or YAML nests, often leading to strict borrow checker errors (E0499/E0502) or massive `if let` chains. These DSLs solve this via CPS and a Two-Phase Pointer-Relay Architecture (strictly separating pure evaluation from unsafe binding). They explore target nodes via stack-only pointer arithmetic and extract safe mutable references with zero runtime memory allocation.
 
+
 ## 🔍 Focus
 * **Non-LLM AI:** Meaning-driven intelligence via structural cognition.
 * **Mechanical Sympathy:** Optimizing high-level data structures for hardware realities (e.g., cache locality, register-level checks).
 * **Compile-time Abstraction:** Moving dynamic evaluations to compile-time resolution via macros.
+
 
 ## 🧩 Parallel Tools
 Additional structural tools that coexist with the Cognitive OS toolchain.
@@ -93,6 +104,7 @@ Additional structural tools that coexist with the Cognitive OS toolchain.
 **[Emlex](https://github.com/rhetro/emlex) — Compile-Time S-Expression Math Engine**  
 A compile-time S-expression DSL built entirely with `macro_rules!`, treating mathematics as a structural object rather than a runtime computation. It fully parses S-expressions using declarative macros, constructs ASTs via Continuation-Passing Style (CPS) to bypass recursion limits, and regenerates reverse DSL forms for structural optimization (e.g., `exp(ln(x)) → x`).  
 Evaluation is deferred into non‑capturing function pointers, enabling LLVM Dead Code Elimination (DCE) to erase unused ASTs and enforce zero runtime overhead. Emlex provides dual engines—real-number DSL `eml!` and complex-number DSL `ceml!`—capable of evaluating expressions such as Euler’s identity at compile time.
+
 
 ## 🔗 Links & Contact
 * **Research:** [Cognitive Operating System (Zenodo)](https://doi.org/10.5281/zenodo.18191421)
