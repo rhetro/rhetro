@@ -2,9 +2,11 @@
 
 **Structural Designer / Architect of the Cognitive Operating System**
 
-I am developing the **Cognitive Operating System**, an AI architecture designed to generate meaning through structural configuration and topology, rather than relying on statistical text generation (LLMs). 
+I am developing the **Cognitive Operating System**, an AI architecture that explores meaning through structural configuration and topology, rather than statistical text generation (LLMs). 
 
-To support this, I build systems-level tools that focus on structural representation, compile-time evaluation, and memory-efficient runtime execution.
+In parallel to this research, I build independent systems-level tools that address structural limitations in Rust—focusing on representation, compile-time evaluation, and memory-efficient execution. 
+
+These tools are not components of the Cognitive OS, but arise from the same structural principles.
 
 
 ## 📦 The Toolchain Overview
