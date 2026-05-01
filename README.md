@@ -15,7 +15,7 @@ I recently designed and built the following foundational components to address s
 
 | Name | Category | LOC | Dependency | Purpose |
 |------|----------|-----|------------|---------|
-| **[Ordex](https://github.com/rhetro/ordex)** · [crates.io](https://crates.io/crates/ordex) | Execution Primitives | 400 | none | Deterministic multi-mutable aliasing & zero-overhead memory routing. |
+| **[Ordex](https://github.com/rhetro/ordex)** · [crates.io](https://crates.io/crates/ordex) | Execution Primitives | 400 | none | Deterministic multi-mutable aliasing with near-zero overhead and cache-efficient access patterns. |
 | **[Ordag](https://github.com/rhetro/ordag)** · [crates.io](https://crates.io/crates/ordag) | Execution Primitives | 180 | ordex | Compile-time DAG prover eliminating all runtime alias checks. |
 | **[Ordent](https://github.com/rhetro/ordent)** · [crates.io](https://crates.io/crates/ordent) | Execution Primitives | 180 | ordex | Hardware-quantized Kuramoto engine for deterministic phase collapse. |
 | **[Axioma](https://github.com/rhetro/axioma)** · [crates.io](https://crates.io/crates/axioma) | Static Projection & Compilation | 400 | none | Compile-time JSON-to-matrix topology projection. |
@@ -43,12 +43,12 @@ These are not mere targets for "performance tuning"; they represent structural i
 ### Structural Execution Primitives
 
 **[Ordex](https://github.com/rhetro/ordex) — Deterministic Aliasing & Generational Arena**
-> A memory model that makes Rust’s “impossible” case—simultaneous mutable aliasing to multiple elements—deterministic and zero-overhead.
+> A memory model that makes Rust’s “impossible” case—simultaneous mutable aliasing to multiple elements—deterministic with near-zero overhead relative to memory access.
 
-A generational arena that maintains the absolute physical limits of sequential access performance while solving the structural impossibility of "simultaneous mutable aliasing to multiple elements" in Rust with zero overhead.
-* **Memory Layout Optimization:** `Option<Index>` is compressed to 8 bytes via Null Pointer Optimization (NPO), perfectly aligning the data structure with hardware cache lines. This establishes alias verification without degrading the memory access performance of a standard arena allocator.
-* **Simultaneous Access for N ≤ 16 (`align!`):** Performs verification using fixed-size stack arrays, triggering LLVM auto-vectorization (SIMD) to complete validation in effectively O(1) time with zero allocations.
-* **Simultaneous Access for N > 16 (`ordex`):** Switches to a batch verification model using O(N log N) dynamic sorting and O(N) linear scanning. This prevents I-Cache (Instruction Cache) bloat while strictly keeping heap allocations at absolute zero within high-frequency loops.
+A generational arena that preserves near-sequential memory access characteristics while resolving the structural limitation of simultaneous mutable aliasing in Rust.
+* **Memory Layout Optimization:** `Option<Index>` is compressed to 8 bytes via Null Pointer Optimization (NPO), maintaining a compact representation that maximizes cache density without degrading access performance.
+* **Simultaneous Access for N ≤ 16 (`align!`):** Performs verification using fixed-size stack arrays, enabling fully unrolled, bounded constant-time verification with zero heap allocation.
+* **Simultaneous Access for N > 16 (`ordex`):** Switches to a batch verification model using O(N log N) sorting and O(N) linear scanning, aligning access patterns toward sequential traversal and achieving amortized zero allocations in high-frequency loops.
 
 
 **[Ordag](https://github.com/rhetro/ordag) — Static DAG Prover & Execution Engine**
