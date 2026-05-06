@@ -15,6 +15,7 @@ I recently designed and built the following foundational components to address s
 
 | Name | Category | LOC | Dependency | Purpose |
 |------|----------|-----|------------|---------|
+| **[Zan-sort](https://github.com/rhetro/zan-sort)** · [crates.io](https://crates.io/crates/zan-sort) | Execution Primitives | 500 | none | Hardware-oriented near-linear routing-based sort saturating DRAM bandwidth. |
 | **[Ordex](https://github.com/rhetro/ordex)** · [crates.io](https://crates.io/crates/ordex) | Execution Primitives | 400 | none | Deterministic multi-mutable aliasing with near-zero overhead and cache-efficient access patterns. |
 | **[Ordag](https://github.com/rhetro/ordag)** · [crates.io](https://crates.io/crates/ordag) | Execution Primitives | 180 | ordex | Compile-time DAG prover eliminating all runtime alias checks. |
 | **[Ordent](https://github.com/rhetro/ordent)** · [crates.io](https://crates.io/crates/ordent) | Execution Primitives | 180 | ordex | Hardware-quantized Kuramoto engine for deterministic phase collapse. |
@@ -41,6 +42,14 @@ These are not mere targets for "performance tuning"; they represent structural i
 
 
 ### Structural Execution Primitives
+
+**[Zan-sort](https://github.com/rhetro/zan-sort) — Hardware-Oriented Hybrid Sort**
+> A sorting engine that treats ordering as deterministic routing rather than comparison, aligning the entire pipeline with physical memory boundaries.
+
+Sorting performance is limited not by algorithmic complexity but by hardware utilization. zan-sort reduces ordering to a single absolute `u64` key and executes a multi-phase routing pipeline designed to saturate DRAM bandwidth.
+
+* **Disjoint Parallel Routing:** Dynamically scales bucket precision and maps the key space into 32 bits via dynamic precision scaling. Threads perform concurrent scatter writes into a unified buffer using precomputed disjoint prefix-sum offsets, eliminating locks and shared-state contention.
+* **Cache-Boundary Execution:** Switches execution phases strictly based on physical cache limits. Local SoA bucketing remains within L2 boundaries to avoid DRAM penalties, while L1-resident datasets fall back to comparison logic only when it is physically optimal.
 
 **[Ordex](https://github.com/rhetro/ordex) — Deterministic Aliasing & Generational Arena**
 > A memory model that makes Rust’s “impossible” case—simultaneous mutable aliasing to multiple elements—deterministic with near-zero overhead relative to memory access.
