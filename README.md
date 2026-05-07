@@ -44,13 +44,17 @@ These are not mere targets for "performance tuning"; they represent structural i
 ### Structural Execution Primitives
 
 **[Zan-sort](https://github.com/rhetro/zan-sort) — Hardware-Oriented O(N) Sorting Engine**
-> A structural sorting engine that abandons comparison-based evaluation entirely, treating ordering as a hardware memory bandwidth saturation problem.
+> A structural sorting engine that abandons comparison-based evaluation entirely, treating ordering strictly as a hardware memory bandwidth saturation problem.
 
-Most sorting implementations are limited by their misalignment with modern CPU memory hierarchies. `zan-sort` reduces ordering to a single absolute `u64` key (`SortKey`) and achieves near-linear scaling through a hardware-adaptive pipeline:
+Most sorting implementations are limited by their misalignment with modern CPU memory hierarchies. `zan-sort` abandons the `Ord` trait, reducing the ordering rule to a single absolute `u64` key (`SortKey`). It achieves near-linear scaling through a hardware-adaptive pipeline:
 
 * **Single-Pass Disjoint Routing:** For DRAM-bound datasets, dynamic precision scaling and global prefix-sum offsets assign disjoint write regions to threads. This enables lock-free parallel scatter writes with no atomics or shared mutable state.
-* **Cache-Hierarchy Alignment:** Processing transitions across register-level insertion (N ≤ 16), L1-optimized comparison fallback, and L2-bound Structure-of-Arrays (SoA) bucketing with bitmap collision resolution.
+* **Cache-Hierarchy Alignment:** Processing transitions across register-level insertion (N ≤ 16), L1-optimized comparison fallback, and L2-bound Structure of Arrays (SoA) bucketing with bitmap collision resolution.
 * **Minimal Sufficient Structure:** Removes multi-pass histograms, thread coordination, and auxiliary algorithms—retaining only the mechanisms required to saturate theoretical memory throughput.
+
+These architectural constraints yield the following empirical results:
+* **100M elements:** 678 ms on 8 cores (vs. `rayon::par_sort_unstable` at 954 ms)  
+* **5M elements:** 34.8 ms single-threaded (vs. `std::sort_unstable` at 154.8 ms)
 
 **[Ordex](https://github.com/rhetro/ordex) — Deterministic Aliasing & Generational Arena**
 > A memory model that makes Rust’s “impossible” case—simultaneous mutable aliasing to multiple elements—deterministic with near-zero overhead relative to memory access.
