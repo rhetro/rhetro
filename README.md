@@ -15,6 +15,7 @@ I recently designed and built the following foundational components to address s
 
 | Name | Category | LOC | Dependency | Purpose |
 |------|----------|-----|------------|---------|
+| **[Zan-sort](https://github.com/rhetro/zan-sort)** · [crates.io](https://crates.io/crates/zan-sort) | Execution Primitives | 500 | none | Hardware-oriented O(N) sorting engine saturating DRAM throughput via single-pass disjoint routing. |
 | **[Ordex](https://github.com/rhetro/ordex)** · [crates.io](https://crates.io/crates/ordex) | Execution Primitives | 400 | none | Deterministic multi-mutable aliasing with near-zero overhead and cache-efficient access patterns. |
 | **[Ordag](https://github.com/rhetro/ordag)** · [crates.io](https://crates.io/crates/ordag) | Execution Primitives | 180 | ordex | Compile-time DAG prover eliminating all runtime alias checks. |
 | **[Ordent](https://github.com/rhetro/ordent)** · [crates.io](https://crates.io/crates/ordent) | Execution Primitives | 180 | ordex | Hardware-quantized Kuramoto engine for deterministic phase collapse. |
@@ -41,6 +42,15 @@ These are not mere targets for "performance tuning"; they represent structural i
 
 
 ### Structural Execution Primitives
+
+**[Zan-sort](https://github.com/rhetro/zan-sort) — Hardware-Oriented O(N) Sorting Engine**
+> A structural sorting engine that abandons comparison-based evaluation entirely, treating ordering as a hardware memory bandwidth saturation problem.
+
+Most sorting implementations are limited by their misalignment with modern CPU memory hierarchies. `zan-sort` reduces ordering to a single absolute `u64` key (`SortKey`) and achieves near-linear scaling through a hardware-adaptive pipeline:
+
+* **Single-Pass Disjoint Routing:** For DRAM-bound datasets, dynamic precision scaling and global prefix-sum offsets assign disjoint write regions to threads. This enables lock-free parallel scatter writes with no atomics or shared mutable state.
+* **Cache-Hierarchy Alignment:** Processing transitions across register-level insertion (N ≤ 16), L1-optimized comparison fallback, and L2-bound Structure-of-Arrays (SoA) bucketing with bitmap collision resolution.
+* **Minimal Sufficient Structure:** Removes multi-pass histograms, thread coordination, and auxiliary algorithms—retaining only the mechanisms required to saturate theoretical memory throughput.
 
 **[Ordex](https://github.com/rhetro/ordex) — Deterministic Aliasing & Generational Arena**
 > A memory model that makes Rust’s “impossible” case—simultaneous mutable aliasing to multiple elements—deterministic with near-zero overhead relative to memory access.
