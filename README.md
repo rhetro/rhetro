@@ -8,6 +8,10 @@ In parallel to this research, I build independent systems-level tools that addre
 
 These tools are not components of the Cognitive OS, but arise from the same structural principles.
 
+> All my DSL engines (Axioma / Axiomabuf / Opejson / Opeyml / Xopsy / Xopsyml / Emlex) are implemented using pure macro_rules! only — without any procedural macros, syn, quote, or AST generation.
+> Each engine performs compile-time structural computation — topology projection, path routing, pattern recognition, and static capacity planning — entirely through declarative macro expansion on raw token streams.
+> No proc-macro overhead. No AST construction. Runtime behavior is reduced to the minimal operations required by the underlying data model (e.g., serde_json where applicable).
+
 
 ## 📦 The Toolchain Overview
 
