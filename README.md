@@ -44,7 +44,7 @@ I recently designed and built the following foundational components to address s
 
 | Name | Category | LOC | Dependency | Purpose |
 |------|----------|-----|------------|---------|
-| **[RZAF](private)** | Structural Static Analyzer | 1100 | none | A static analysis engine that identifies vulnerabilities and state transitions by treating source code as pure structural topology, entirely bypassing AST generation. |
+| **RZAF(private)** | Structural Static Analyzer | 1100 | none | A static analysis engine that identifies vulnerabilities and state transitions by treating source code as pure structural topology, entirely bypassing AST generation. |
 | **[Zan-sort](https://github.com/rhetro/zan-sort)** · [crates.io](https://crates.io/crates/zan-sort) | Execution Primitives | 500 | none | Hardware-oriented O(N) sorting engine saturating DRAM throughput via single-pass disjoint routing. |
 | **[Ordex](https://github.com/rhetro/ordex)** · [crates.io](https://crates.io/crates/ordex) | Execution Primitives | 400 | none | Deterministic multi-mutable aliasing with near-zero overhead and cache-efficient access patterns. |
 | **[Ordag](https://github.com/rhetro/ordag)** · [crates.io](https://crates.io/crates/ordag) | Execution Primitives | 180 | ordex | Compile-time DAG prover eliminating all runtime alias checks. |
