@@ -98,7 +98,7 @@ These architectural constraints yield the following empirical results:
 A generational arena that preserves near-sequential memory access characteristics while resolving the structural limitation of simultaneous mutable aliasing in Rust.
 * **Memory Layout Optimization:** `Option<Index>` is compressed to 8 bytes via Null Pointer Optimization (NPO), maintaining a compact representation that maximizes cache density without degrading access performance.
 * **Simultaneous Access for N ≤ 16 (`align!`):** Performs verification using fixed-size stack arrays, enabling fully unrolled, bounded constant-time verification with zero heap allocation.
-* **Simultaneous Access for N > 16 (`ordex`):** Switches to a batch verification model using O(N log N) sorting and O(N) linear scanning, aligning access patterns toward sequential traversal and achieving amortized zero allocations in high-frequency loops.
+* **Simultaneous Access for N > 16 (ordex / v0.2.0 Engine):** Employs a hybrid bucket routing engine with an L2-friendly Structure of Arrays (SoA) layout. Uses arithmetic scaling and bitmap operations for fast-path alias checks, achieving amortized O(N) validation throughput and remaining strictly zero-allocation during buffer reuses via clear_and_verify.
 
 <br>
 
