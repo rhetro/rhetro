@@ -48,7 +48,7 @@ I recently designed and built the following foundational components to address s
 | **[Zan-sort](https://github.com/rhetro/zan-sort)** · [crates.io](https://crates.io/crates/zan-sort) | Execution Primitives | 500 | none | Hardware-oriented O(N) sorting engine saturating DRAM throughput via single-pass disjoint routing. |
 | **[Ordex](https://github.com/rhetro/ordex)** · [crates.io](https://crates.io/crates/ordex) | Execution Primitives | 400 | none | Deterministic multi-mutable aliasing with near-zero overhead and cache-efficient access patterns. |
 | **[Ordag](https://github.com/rhetro/ordag)** · [crates.io](https://crates.io/crates/ordag) | Execution Primitives | 180 | ordex | Compile-time DAG prover eliminating all runtime alias checks. |
-| **[Ordent](https://github.com/rhetro/ordent)** · [crates.io](https://crates.io/crates/ordent) | Execution Primitives | 180 | ordex | Hardware-quantized Kuramoto engine for deterministic phase collapse. |
+| **[Ordent](https://github.com/rhetro/ordent)** · [crates.io](https://crates.io/crates/ordent) (OSS / Enterprise) | Execution Primitives | 180 | ordex | Hardware-quantized Kuramoto engine for deterministic phase collapse. |
 | **[Axioma](https://github.com/rhetro/axioma)** · [crates.io](https://crates.io/crates/axioma) | Static Projection & Compilation | 400 | none | Compile-time JSON-to-matrix topology projection. |
 | **[Axiomabuf](https://github.com/rhetro/axiomabuf)** · [crates.io](https://crates.io/crates/axiomabuf) | Static Projection & Compilation | 580 | none | Zero-allocation 1-pass Protobuf macro-router. |
 | **[Emlex](https://github.com/rhetro/emlex)** · [crates.io](https://crates.io/crates/emlex) | Static Projection & Compilation | 280 | num-complex | Compile-time S-expression math engine (macro_rules!-only). |
@@ -116,6 +116,8 @@ A hardware router designed to force "deterministic state collapse" on non-linear
 * Drops heavy floating-point modulo operations, treating phase as a `u32` integer overflow (Binary Angle Measurement / BAM) for zero-cost calculation.
 * Maintains topology in a Compressed Sparse Row (CSR) format, flipping the computation axis from edge-centric to node-centric to fundamentally eliminate data races.
 * Achieves 100% SIMD (`f32x8`) lane saturation via a branchless Taylor series expansion.
+
+**For mission-critical network infrastructure and deterministic state convergence, a proprietary Enterprise architecture is maintained separately.**
 
 <br><br>
 
@@ -190,4 +192,4 @@ Evaluation is deferred into non‑capturing function pointers, enabling LLVM Dea
   -  [Non-Linear Network Boids Simulation (Lotka-Volterra Model / Rust + Wasm)](https://rhetro.pages.dev/wasm/ordex/boids/)
   -  [Ordex Topological Visualizer Demo](https://rhetro.pages.dev/rust/ordex/ordex-topological-visualizer/)
 * **Architecture Discussion:** [Discord Server](https://discord.com/invite/Eb5xxSr96b) 
-* **Contact:** `rhetro@rhetroxc.com` (For consulting, sponsorships, and core research inquiries)
+* **Contact:** `rhetro@rhetroxc.com` (For Enterprise licensing, PoC development, and R&D consulting)
