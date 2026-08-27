@@ -185,6 +185,7 @@ Evaluation is deferred into non‑capturing function pointers, enabling LLVM Dea
 
 # 🔗 Links & Contact
 * **Research:** [Cognitive Operating System (Zenodo)](https://doi.org/10.5281/zenodo.18191421)
+* **Articles:** [Zenn](https://zenn.dev/rhetro)
 * **Updates & Visual Demos:**
   -  [Non-Linear Network Boids Simulation (Lotka-Volterra Model / Rust + Wasm)](https://rhetro.pages.dev/wasm/ordex/boids/)
   -  [Ordex Topological Visualizer Demo](https://rhetro.pages.dev/rust/ordex/ordex-topological-visualizer/)
