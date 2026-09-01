@@ -76,19 +76,20 @@ These are not mere targets for "performance tuning"; they represent structural i
 ## **Structural Execution Primitives**
 
 <br>
+
 ### **[Zan-sort](https://github.com/rhetro/zan-sort) — Hardware-Oriented O(N) Sorting Engine**
 > A structural sorting engine that abandons comparison-based evaluation entirely, treating ordering strictly as a hardware memory bandwidth saturation problem.
 
 Most sorting implementations are limited by their misalignment with modern CPU memory hierarchies. `zan-sort` abandons the `Ord` trait, reducing the ordering rule to a single absolute `u64` key (`SortKey`). It achieves near-linear scaling through a hardware-adaptive pipeline:
 
-* **Single-Pass Disjoint Routing:** For DRAM-bound datasets, dynamic precision scaling and global prefix-sum offsets assign disjoint write regions to threads. This enables lock-free parallel scatter writes with no atomics or shared mutable state. For single-threaded environments (WASM, Rayon worker pools, embedded systems), it utilizes a zero-allocation `MacroWorkspace` to maximize raw linear-memory bandwidth. This sequential routing mode is not WASM-specific—it is a general single-threaded variant designed for environments without parallelism.
+* **Single-Pass Disjoint Routing:** For DRAM-bound datasets, dynamic precision scaling and global prefix-sum offsets assign disjoint write regions to threads. This enables lock-free parallel scatter writes with no atomics or shared mutable state.
 * **Cache-Hierarchy Alignment:** Processing transitions across register-level insertion (N ≤ 16), L1-optimized comparison fallback, and L2-bound Structure of Arrays (SoA) bucketing with bitmap collision resolution.
 * **Minimal Sufficient Structure:** Removes multi-pass histograms, thread coordination, and auxiliary algorithms—retaining only the mechanisms required to saturate theoretical memory throughput.
 
 These architectural constraints yield the following empirical results:
-* **100M elements (Native Parallel):** 678 ms on 8 cores (vs. `rayon::par_sort_unstable` at 954 ms)  
+* **100M elements:** 678 ms on 8 cores (vs. `rayon::par_sort_unstable` at 954 ms)
 * **33M elements (WASM Sequential):** 422.8 ms (vs. `std::sort_unstable` at 621.3 ms)
-* **5M elements (Native Single-threaded / L2-bound):** 34.8 ms (vs. `std::sort_unstable` at 154.8 ms)
+* **5M elements:** 34.8 ms single-threaded (vs. `std::sort_unstable` at 154.8 ms)
 
 <br>
 
