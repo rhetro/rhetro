@@ -45,6 +45,7 @@ I recently designed and built the following foundational components to address s
 | Name | Category | LOC | Dependency | Purpose |
 |------|----------|-----|------------|---------|
 | **RZAF (private)** | Structural Static Analyzer | 1100 | none | A static analysis engine that identifies vulnerabilities and state transitions by treating source code as pure structural topology, entirely bypassing AST generation. |
+| [**Arsort**](https://crates.io/crates/arsort) · [crates.io](https://crates.io/crates/arsort) | Execution Primitives | 450 | none | Zero-allocation arithmetic routing micro-engine optimizing L1/L2 cache-bound array sorting via branchless fractional scatter. |
 | **[Zan-sort](https://github.com/rhetro/zan-sort)** · [crates.io](https://crates.io/crates/zan-sort) | Execution Primitives | 500 | none | Hardware-oriented O(N) sorting engine saturating DRAM throughput via single-pass disjoint routing. |
 | **[Ordex](https://github.com/rhetro/ordex)** · [crates.io](https://crates.io/crates/ordex) | Execution Primitives | 400 | none | Deterministic multi-mutable aliasing with near-zero overhead and cache-efficient access patterns. |
 | **[Ordag](https://github.com/rhetro/ordag)** · [crates.io](https://crates.io/crates/ordag) | Execution Primitives | 180 | ordex | Compile-time DAG prover eliminating all runtime alias checks. |
@@ -74,6 +75,16 @@ These are not mere targets for "performance tuning"; they represent structural i
 <br><br>
 
 ## **Structural Execution Primitives**
+
+<br>
+
+### **[Arsort](https://github.com/rhetro/arsort) — Arithmetic Routing Micro-Engine**
+> A specialized, zero-runtime-allocation micro-engine engineered to eliminate branch mispredictions and comparison loops in L1/L2 cache-bound datasets (N ≤ 5000).
+
+While conventional sorting relies on comparison branches that stall modern pipeline instruction flows, `arsort` converts values directly into memory coordinate targets via fixed-point arithmetic multipliers and zero-allocation thread-local workspace (`thread_local!`).
+- **Branchless Arithmetic Routing:** Maps target bucket locations through single-pass fractional multiplication, completely bypassing pipeline stalls caused by O(N log N) comparison branches.
+- **Perfect Hash & AVX2 Topological Fast-Paths:** Dynamically routes bounded range inputs into single-pass counting distribution and uses AVX2 SIMD register matching (`__m256i`) for low-cardinality datasets.
+- **Pure L1/L2 Cache Saturation:** Delivers a 1.4x–1.6x speedup over `std::sort_unstable` (`ipnsort`) and outperforms state-of-the-art radix sorting engines within its target hardware cache boundary.
 
 <br>
 
